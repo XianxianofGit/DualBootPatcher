@@ -4,7 +4,7 @@ language:
 sudo: required
 
 android:
-  compents:
+  components:
      - build-tools-26.0.2
      - android-27
      - platform-tools
@@ -20,12 +20,10 @@ before_install:
   - ./bootstrap
   - make -j8
   - sudo make install
-  - sdkmanager --install "platforms;android-27"
   - echo "export USE_CCACHE=1" >> ~/.bashrc
   - source ~/.bashrc
   
 script:
-  - ls /usr/local/android-sdk
   - cd ~/build/XianxianofGit/DualBootPatcher/
   - mkdir build && cd build/
   - cmake .. -DMBP_BUILD_TARGET=android -DMBP_BUILD_TYPE=debug
