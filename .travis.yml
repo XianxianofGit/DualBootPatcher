@@ -1,0 +1,36 @@
+language:
+  - ANDROID
+
+sudo: required
+
+android:
+  compents:
+     - build-tools-26.0.2
+     - android-27
+     - platform-tools
+     - tools
+
+before_install:
+  - sudo apt install openssl libgtest-dev libyaml-cpp-dev ccache libboost-dev libssl-dev openssl python-minimal build-essential libfontconfig1 findutils git make libprocps-dev unzip zip gcc-multilib g++-multilib lib32ncurses5-dev transifex-client gnupg mesa-common-dev libglu1-mesa-dev qttools5-dev-tools libqt5core5a libarchive-dev liblz4-tool liblzma-dev liblz4-dev zlib1g-dev lib32z-dev openjdk-8-jdk openjdk-8-jdk-headless
+  - wget https://dl.google.com/android/repository/android-ndk-r15c-linux-x86_64.zip && unzip -q android-ndk-r15c-linux-x86_64.zip && mv android-ndk-r15c android-ndk
+  - echo "export ANDROID_NDK=$(pwd)/android-ndk" >> ~/.bashrc
+  - echo "export ANDROID_NDK_HOME=$(pwd)/android-ndk" >> ~/.bashrc
+  - wget https://cmake.org/files/v3.10/cmake-3.10.2.tar.gz && tar xzf cmake-3.10.2.tar.gz && cd cmake-3.10.2
+  - sed -i 's|cmake_options="-DCMAKE_BOOTSTRAP=1"|cmake_options="-DCMAKE_BOOTSTRAP=1 -DCMAKE_USE_OPENSSL=ON"|' bootstrap
+  - ./bootstrap
+  - make -j8
+  - sudo make install
+  - echo "export USE_CCACHE=1" >> ~/.bashrc
+  - source ~/.bashrc
+  
+script:
+  - cd ~/build/XianxianofGit/DualBootPatcher/
+  - mkdir build && cd build/
+  - cmake .. -DMBP_BUILD_TARGET=android -DMBP_BUILD_TYPE=debug
+  - make -j8
+  - cpack -G TXZ
+  - make apk
+  - echo "script"
+  
+after_success:
+  - echo "success"
