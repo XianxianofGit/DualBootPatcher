@@ -25,6 +25,7 @@ before_install:
   - source ~/.bashrc
   
 script:
+  - ls /usr/local/android-sdk
   - cd ~/build/XianxianofGit/DualBootPatcher/
   - mkdir build && cd build/
   - cmake .. -DMBP_BUILD_TARGET=android -DMBP_BUILD_TYPE=debug
