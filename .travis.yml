@@ -11,6 +11,7 @@ android:
      - tools
 
 before_install:
+  - ls /usr/local/android-sdk
   - sudo apt install openssl libgtest-dev libyaml-cpp-dev ccache libboost-dev libssl-dev openssl python-minimal build-essential libfontconfig1 findutils git make libprocps-dev unzip zip gcc-multilib g++-multilib lib32ncurses5-dev transifex-client gnupg mesa-common-dev libglu1-mesa-dev qttools5-dev-tools libqt5core5a libarchive-dev liblz4-tool liblzma-dev liblz4-dev zlib1g-dev lib32z-dev openjdk-8-jdk openjdk-8-jdk-headless
   - wget https://dl.google.com/android/repository/android-ndk-r15c-linux-x86_64.zip && unzip -q android-ndk-r15c-linux-x86_64.zip && mv android-ndk-r15c android-ndk
   - echo "export ANDROID_NDK=$(pwd)/android-ndk" >> ~/.bashrc
