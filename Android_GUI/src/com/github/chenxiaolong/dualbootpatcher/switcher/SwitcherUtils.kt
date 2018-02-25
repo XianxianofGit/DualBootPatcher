@@ -245,6 +245,7 @@ object SwitcherUtils {
 
     @Throws(IOException::class, MbtoolException::class)
     fun copyBootPartition(context: Context, iface: MbtoolInterface, targetFile: File): Boolean {
+        Log.i(TAG, "Boot img path is $targetFile ")
         val bootPartition = getBootPartition(context, iface)
         if (bootPartition == null) {
             Log.e(TAG, "Failed to determine boot partition")
